@@ -25,7 +25,6 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
-    
 }
 
 
@@ -51,7 +50,6 @@ extension LoginViewController: LoginScreenProtocol{
         print("--------------------------------")
         print("Botão do login foi pressionado")
         print("--------------------------------")
-//        self.navigationController?.pushViewController(<#T##viewController: UIViewController##UIViewController#>, animated: <#T##Bool#>)
     }
     
     func actionRegisterButton() {

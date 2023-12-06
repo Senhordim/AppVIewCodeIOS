@@ -16,9 +16,6 @@ class LoginScreen: UIView {
     
     private weak var delegate: LoginScreenProtocol?
     
-    func delegate(delegate: LoginScreenProtocol?){
-        self.delegate = delegate
-    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,11 +42,16 @@ class LoginScreen: UIView {
         self.addSubview(self.registerButton)
     }
     
+    func delegate(delegate: LoginScreenProtocol?){
+        self.delegate = delegate
+    }
+    
     public func configTextFieldDelegate(delegate: UITextFieldDelegate){
         self.emailTextField.delegate = delegate
         self.passwordTextField.delegate = delegate
     }
     
+    // Components
     lazy var loginLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -121,10 +123,12 @@ class LoginScreen: UIView {
         return registerButton
     }()
     
+    // função para login
     @objc private func tappedLoginButton(){
         self.delegate?.actionLoginButton()
     }
     
+    // função para registro
     @objc private func tappedRegisterButton(){
         self.delegate?.actionRegisterButton()
         
