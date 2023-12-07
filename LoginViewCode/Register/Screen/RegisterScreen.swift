@@ -47,6 +47,32 @@ class RegisterScreen: UIView {
         self.delegate = delegate
     }
     
+    func validateTextfields(){
+        let email: String = self.emailTextField.text ?? ""
+        let password: String = self.passwordTextField.text ?? ""
+        let passwordConfirmation = self.passwordTextField.text ?? ""
+        
+        if !email.isEmpty && !password.isEmpty && !passwordConfirmation.isEmpty {
+            self.buttonEnable(true)
+        } else {
+            self.buttonEnable(false)
+        }
+    }
+    
+    private func buttonEnable(_ enable: Bool){
+        if enable {
+            self.registerButton.setTitleColor(.white, for: .normal)
+            self.registerButton.isEnabled = true
+        } else {
+            self.registerButton.setTitleColor(.white, for: .normal)
+            self.registerButton.backgroundColor = .lightGray
+            self.registerButton.isEnabled = false
+            
+            self.emailTextField.layer.borderColor = UIColor.red.cgColor
+            
+        }
+    }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
