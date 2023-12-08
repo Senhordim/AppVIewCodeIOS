@@ -14,10 +14,13 @@ class LoginViewController: UIViewController {
     
     var auth: Auth?
     
+    var alert: Alert?
+    
     override func loadView() {
         self.loginScreen = LoginScreen()
         self.view = self.loginScreen
         self.auth = Auth.auth()
+        self.alert = Alert(controller: self)
     }
     
     override func viewDidLoad() {
@@ -56,12 +59,12 @@ extension LoginViewController: LoginScreenProtocol{
         
         self.auth?.signIn(withEmail: register.getEmail(), password: register.getPassword(), completion: { (usuario, error) in
             if error != nil{
-                print("erro ao logar")
+                self.alert?.getAlert(title: "Alerta!", description: "Usuário ou senha inválidos")
             } else {
                 if usuario == nil {
-                    print("Tivemos um problema inesperado, tente novamente mais tarde")
+                    self.alert?.getAlert(title: "Erro!", description: "Tivemos um problema inesperado, tente novamente mais tarde")
                 } else {
-                    print("Usuário logado com sucesso")
+                    self.alert?.getAlert(title: "Parabéns!", description: "Usuário logado com sucesso!")
                 }
             }
         })
