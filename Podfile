@@ -7,4 +7,7 @@ target 'LoginViewCode' do
 
   # Pods for LoginViewCode
   pod 'SnapKit', '~> 5.6.0'
+  
+  pod 'FirebaseAnalytics'
+  pod 'FirebaseAuth'
 end

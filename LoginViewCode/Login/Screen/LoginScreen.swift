@@ -16,7 +16,8 @@ class LoginScreen: UIView {
     
     private weak var delegate: LoginScreenProtocol?
     
-
+   
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setLayout()
@@ -54,6 +55,14 @@ class LoginScreen: UIView {
     public func configTextFieldDelegate(delegate: UITextFieldDelegate){
         self.emailTextField.delegate = delegate
         self.passwordTextField.delegate = delegate
+    }
+    
+    public func getEmail()-> String {
+        return self.emailTextField.text ?? ""
+    }
+    
+    public func getPassword()-> String {
+        return self.passwordTextField.text ?? ""
     }
     
     // Components

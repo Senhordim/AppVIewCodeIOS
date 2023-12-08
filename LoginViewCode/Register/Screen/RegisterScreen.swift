@@ -56,6 +56,16 @@ class RegisterScreen: UIView {
         self.delegate = delegate
     }
     
+    public func getEmail()-> String {
+        return self.emailTextField.text ?? ""
+    }
+    
+    public func getPassword()-> String {
+        return self.passwordTextField.text ?? ""
+    }
+    
+    
+    
     func validateTextfields(){
         let email: String = self.emailTextField.text ?? ""
         let password: String = self.passwordTextField.text ?? ""
