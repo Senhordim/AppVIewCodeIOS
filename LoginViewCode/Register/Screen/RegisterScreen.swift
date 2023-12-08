@@ -20,7 +20,16 @@ class RegisterScreen: UIView {
         super.init(frame: frame)
         setLayout()
         setSubview()
-        setupConstraints()
+        backButtonConstrainsts()
+        labelRegisterConstrainsts()
+        imageRegisterConstrainsts()
+        emailTextFieldConstrainsts()
+        passwordTextFieldConstrainsts()
+        passwordConfirmationTextFieldConstrainsts()
+        registerButtonConstrainsts()
+        
+        self.registerButton.isEnabled = false
+        self.registerButton.backgroundColor = .lightGray
     }
     
     private func setLayout(){
@@ -34,7 +43,7 @@ class RegisterScreen: UIView {
     }
     
     private func setSubview(){
-//        self.addSubview(backButton)
+        self.addSubview(backButton)
         self.addSubview(registerLabel)
         self.addSubview(imageRegister)
         self.addSubview(emailTextField)
@@ -63,13 +72,11 @@ class RegisterScreen: UIView {
         if enable {
             self.registerButton.setTitleColor(.white, for: .normal)
             self.registerButton.isEnabled = true
+            self.registerButton.backgroundColor = UIColor(red: 77/255.0, green: 167/255.0, blue: 115/255.0, alpha: 1.0)
         } else {
             self.registerButton.setTitleColor(.white, for: .normal)
             self.registerButton.backgroundColor = .lightGray
             self.registerButton.isEnabled = false
-            
-            self.emailTextField.layer.borderColor = UIColor.red.cgColor
-            
         }
     }
     
@@ -82,8 +89,8 @@ class RegisterScreen: UIView {
     lazy var backButton: UIButton = {
         let backButton = UIButton()
         backButton.translatesAutoresizingMaskIntoConstraints = false
-        backButton.setImage(UIImage(named:"back"), for: .normal)
-        
+        backButton.setImage(UIImage(named:"arrow-ios-back-svgrepo-com"), for: .normal)
+        backButton.addTarget(self, action: #selector(self.tappedBackButton), for: .touchUpInside)
         return backButton
     }()
     
@@ -168,41 +175,98 @@ class RegisterScreen: UIView {
     private func setupConstraints(){
         NSLayoutConstraint.activate([
             
-            // Login Label
-            self.registerLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
-            self.registerLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            
-            // Image Login
-            self.imageRegister.topAnchor.constraint(equalTo: self.registerLabel.bottomAnchor, constant: 10),
-            self.imageRegister.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            self.imageRegister.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            self.imageRegister.heightAnchor.constraint(equalToConstant: 150),
-            
-            // Input Email
-            self.emailTextField.topAnchor.constraint(equalTo: self.imageRegister.bottomAnchor, constant: 20),
-            self.emailTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
-            self.emailTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
-            self.emailTextField.heightAnchor.constraint(equalToConstant: 50),
-            
-            // Input Password
-            self.passwordTextField.topAnchor.constraint(equalTo: self.emailTextField.bottomAnchor, constant: 20),
-            self.passwordTextField.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor),
-            self.passwordTextField.trailingAnchor.constraint(equalTo: self.emailTextField.trailingAnchor ),
-            self.passwordTextField.heightAnchor.constraint(equalToConstant: 50),
-            
-            // Input Password Confirmation
-            self.passwordConfirmationTextField.topAnchor.constraint(equalTo: self.passwordTextField.bottomAnchor, constant: 20),
-            self.passwordConfirmationTextField.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor),
-            self.passwordConfirmationTextField.trailingAnchor.constraint(equalTo: self.emailTextField.trailingAnchor),
-            self.passwordConfirmationTextField.heightAnchor.constraint(equalToConstant: 50),
-            
-            // Register Button
-            self.registerButton.topAnchor.constraint(equalTo: self.passwordConfirmationTextField.bottomAnchor, constant: 20),
-            self.registerButton.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor),
-            self.registerButton.trailingAnchor.constraint(equalTo: self.emailTextField.trailingAnchor),
-            self.registerButton.heightAnchor.constraint(equalToConstant: 50),
-            
         ])
+    }
+    
+    private func backButtonConstrainsts(){
+        // self.backButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
+        // self.backButton.widthAnchor.constraint(equalToConstant: 30),
+        // self.backButton.heightAnchor.constraint(equalToConstant: 30),
+        self.backButton.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(20)
+            make.left.equalTo(self.safeAreaLayoutGuide).offset(28)
+            make.height.width.equalTo(30)
+        }
+    }
+    
+    
+    private func labelRegisterConstrainsts(){
+        // self.registerLabel.topAnchor.constraint(equalTo:self.backButton.bottomAnchor, constant: 20),
+        // self.registerLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+        self.registerLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.backButton.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+        }
+    }
+    
+    private func imageRegisterConstrainsts(){
+        // self.imageRegister.topAnchor.constraint(equalTo: self.registerLabel.bottomAnchor, constant: 10),
+        // self.imageRegister.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+        // self.imageRegister.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+        // self.imageRegister.heightAnchor.constraint(equalToConstant: 150),
+        self.imageRegister.snp.makeConstraints { make in
+            make.top.equalTo(self.registerLabel.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().inset(20)
+            make.height.width.equalTo(150)
+        }
+    }
+    
+    private func emailTextFieldConstrainsts(){
+        // self.emailTextField.topAnchor.constraint(equalTo: self.imageRegister.bottomAnchor, constant: 20),
+        // self.emailTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
+        // self.emailTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
+        // self.emailTextField.heightAnchor.constraint(equalToConstant: 50),
+        
+        self.emailTextField.snp.makeConstraints { make in
+            make.top.equalTo(self.imageRegister.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(40)
+            make.trailing.equalToSuperview().inset(40)
+            make.height.equalTo(50)
+        }
+    }
+    
+    private func passwordTextFieldConstrainsts(){
+        // self.passwordTextField.topAnchor.constraint(equalTo: self.emailTextField.bottomAnchor, constant: 20),
+        // self.passwordTextField.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor),
+        // self.passwordTextField.trailingAnchor.constraint(equalTo: self.emailTextField.trailingAnchor ),
+        // self.passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+        
+        self.passwordTextField.snp.makeConstraints { make in
+            make.top.equalTo(self.emailTextField.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(40)
+            make.trailing.equalToSuperview().inset(40)
+            make.height.equalTo(50)
+        }
+    }
+    
+    
+    
+    private func passwordConfirmationTextFieldConstrainsts(){
+        // self.passwordConfirmationTextField.topAnchor.constraint(equalTo: self.passwordTextField.bottomAnchor, constant: 20),
+        // self.passwordConfirmationTextField.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor),
+        // self.passwordConfirmationTextField.trailingAnchor.constraint(equalTo: self.emailTextField.trailingAnchor),
+        // self.passwordConfirmationTextField.heightAnchor.constraint(equalToConstant: 50),
+        
+        self.passwordConfirmationTextField.snp.makeConstraints { make in
+            make.top.equalTo(self.passwordTextField.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(40)
+            make.trailing.equalToSuperview().inset(40)
+            make.height.equalTo(50)
+        }
+    }
+    
+    private func registerButtonConstrainsts(){
+//        self.registerButton.topAnchor.constraint(equalTo: self.passwordConfirmationTextField.bottomAnchor, constant: 20),
+//        self.registerButton.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor),
+//        self.registerButton.trailingAnchor.constraint(equalTo: self.emailTextField.trailingAnchor),
+//        self.registerButton.heightAnchor.constraint(equalToConstant: 50),
+        self.registerButton.snp.makeConstraints { make in
+            make.top.equalTo(self.passwordConfirmationTextField.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(40)
+            make.trailing.equalToSuperview().inset(40)
+            make.height.equalTo(50)
+        }
     }
     
     // função para registro

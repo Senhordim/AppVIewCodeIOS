@@ -163,7 +163,7 @@ class LoginScreen: UIView {
             make.top.equalTo(self.self.loginLabel.snp.bottom).offset(5)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(150)
+            make.height.width.equalTo(150)
         }
     }
     
