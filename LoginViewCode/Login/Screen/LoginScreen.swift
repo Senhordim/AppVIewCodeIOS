@@ -16,8 +16,6 @@ class LoginScreen: UIView {
     
     private weak var delegate: LoginScreenProtocol?
     
-   
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setLayout()

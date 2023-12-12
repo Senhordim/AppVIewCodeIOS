@@ -62,9 +62,11 @@ extension RegisterViewController: RegisterScreenProtocol {
             if error != nil{
                 self.alert?.getAlert(title: "Erro!", description: "erro ao cadastrar")
             } else {
-                self.alert?.getAlert(title: "Parabéns!", description: "Usuário cadastrado com sucesso", completion: {
-                    self.navigationController?.popViewController(animated: true)
-                })
+//                self.alert?.getAlert(title: "Parabéns!", description: "Usuário cadastrado com sucesso", completion: {
+//                    self.navigationController?.popViewController(animated: true)
+//                })
+                let homeViewController: HomeViewController = HomeViewController()
+                self.navigationController?.pushViewController(homeViewController, animated: true)
             }
         })
     }
